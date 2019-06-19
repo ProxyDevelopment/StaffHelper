@@ -1,0 +1,37 @@
+package me.serverproxy.staffhelper;
+
+import org.bukkit.ChatColor;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+
+public class BannedPlayerJoin implements Listener {
+	
+	private Main plugin;
+	   
+    public BannedPlayerJoin(Main plugin){
+        this.plugin = plugin;
+    }
+	
+	
+	
+
+
+	@EventHandler
+	public void BannedPlayerEvent(final AsyncPlayerPreLoginEvent event) {
+		
+		 if(plugin.getConfig().contains(event.getName())) {
+	            
+			    String banReason = plugin.getConfig().getString(event.getName() + ".reason");
+
+	            String banReasonColored = ChatColor.translateAlternateColorCodes('&', banReason);
+
+	            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED,  ChatColor.translateAlternateColorCodes
+	            		('&', "&8&l---------&7&l[&9StaffHelper&7&l]&8&l---------\n" + "&c&lUsername: " + " " + "&b&l" + event.getName() + "\n" + "&c&lReason:" + " " + "&b&l" + banReasonColored + "\n&8&l---------&7&l[&9StaffHelper&7&l]&8&l---------"));
+	            		
+	        }
+		
+		
+	}
+
+}
