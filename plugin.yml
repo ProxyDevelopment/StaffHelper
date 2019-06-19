@@ -1,0 +1,24 @@
+name: StaffHelper
+main: me.serverproxy.staffhelper.Main
+version: 1.0
+author: ServerProxy
+commands:
+  kick:
+   description: Kicks someone out
+   usage: /kick <name>
+  ban:
+   description: Bans someone from the server.
+   usage: /ban <name>
+  unban:
+   description: Unbans someone from the server.
+   usage: /unban <name>
+permissions:
+  staff.kick:
+   description: Permission to kick people out.
+   default: op
+  staff.ban:
+   description: Permission to ban someone.
+   default: op
+  staff.unban:
+   description: Permission to unban someone.
+   default: op
