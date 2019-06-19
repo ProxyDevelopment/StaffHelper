@@ -1,0 +1,51 @@
+package me.serverproxy.staffhelper;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+
+public class CommandUnBan implements CommandExecutor {
+
+
+	private Main plugin;
+
+	public CommandUnBan(Main plugin){
+		this.plugin = plugin;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+
+		if(!sender.hasPermission("staff.unban")) {
+			sender.sendMessage(ChatColor.RED + "You do not have the correct permissions!");
+			return true;
+		}
+		if(args.length == 0) {
+			sender.sendMessage(ChatColor.RED + "Specify a player.");
+			return true;
+		}
+
+		
+		if(plugin.getConfig().contains(args[0])) {
+			sender.sendMessage(ChatColor.GREEN +  Bukkit.getOfflinePlayer(args[0]).getName() + " has been unbanned.");
+		    
+		    plugin.getConfig().set(args[0], null);
+		    plugin.saveConfig();
+		    
+			
+		} else {
+			sender.sendMessage(ChatColor.RED + Bukkit.getOfflinePlayer(args[0]).getName() + " is not banned");
+		}
+		
+		
+			 
+	    
+
+
+		return true;
+	}
+
+}
